@@ -9,6 +9,6 @@ class AbstractAPI(ABC):
     @abstractmethod
     def get_vacancies(self, job_title):
         """
-        Метод для поиска вакансий с разных платформ.
+        Абстрактный метод для поиска вакансий с разных платформ.
         """
         pass
