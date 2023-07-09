@@ -36,6 +36,20 @@ class Vacancy:
         """
         return self.__title
 
+    @property
+    def ref(self) -> str:
+        """
+        Метод доступа к приватному атрибуту с геттером для ссылки на вакансию.
+        """
+        return self.__ref
+
+    @property
+    def date_published(self) -> int:
+        """
+        Метод доступа к приватному атрибуту с геттером для даты публикации вакансии.
+        """
+        return self.__date_published
+
     def __repr__(self) -> str:
         """
         Магический метод для отображения информации об объекте класса Vacancy в режиме отладки (для разработчиков).
