@@ -6,12 +6,12 @@ class Vacancy:
     Класс для получения информации о вакансии.
     """
 
-    def __init__(self, title: str, ref: str, salary: int, date_published: int):
+    def __init__(self, title: str, link: str, salary: int, date_published: int):
         """
         Инициализирует экземпляр класса Vacancy.
         """
         self.__title = title
-        self.__ref = ref
+        self.__link = link
         self.__salary = salary
         self.__date_published = date_published
 
@@ -37,11 +37,11 @@ class Vacancy:
         return self.__title
 
     @property
-    def ref(self) -> str:
+    def link(self) -> str:
         """
         Метод доступа к приватному атрибуту с геттером для ссылки на вакансию.
         """
-        return self.__ref
+        return self.__link
 
     @property
     def date_published(self) -> int:
@@ -54,14 +54,14 @@ class Vacancy:
         """
         Магический метод для отображения информации об объекте класса Vacancy в режиме отладки (для разработчиков).
         """
-        return f"Vacancy{self.__title, self.__ref, self.__salary, self.__date_published}"
+        return f"Vacancy{self.__title, self.__link, self.__salary, self.__date_published}"
 
     def __str__(self) -> str:
         """
         Магический метод для отображения информации об объекте класса Vacancy для пользователей.
         """
         return f"Vacancy: {self.__title}\n" \
-               f"Reference: {self.__ref}\n" \
+               f"Link: {self.__link}\n" \
                f"Salary: от {self.__salary} руб.\n" \
                f"Date published: {self.__date_published}\n"
 
@@ -90,6 +90,6 @@ class Vacancy:
         """
         Метод проверяет, являются ли данные о вакансии валидными.
         """
-        if not all([self.__title, self.__ref, self.__salary, self.__date_published]):
+        if not all([self.__title, self.__link, self.__salary, self.__date_published]):
             return False
         return True

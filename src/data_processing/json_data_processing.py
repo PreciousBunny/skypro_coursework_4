@@ -14,14 +14,14 @@ class JSONDataProcessing(AbstractDataProcessing):
         """
         self.path = path
 
-    def add_vacancy(self, vacancy=Vacancy):
+    def add_vacancy(self, vacancy: Vacancy):
         """
         Метод для добавления вакансий в JSON файл.
         """
         with open(self.path, "a", encoding="utf-8") as file:
             vacancy_dict = {
                 "title": vacancy.title,
-                "Reference": vacancy.ref,
+                "Link": vacancy.link,
                 "salary": vacancy.salary,
                 "Date published": vacancy.date_published
             }
@@ -36,11 +36,11 @@ class JSONDataProcessing(AbstractDataProcessing):
         with open(self.path, "r", encoding="utf-8") as file:
             for line in file:
                 vacancy_data = json.loads(line)
-                if self._vacancy_relevant_criteria(vacancy_data, specified_criteria):
+                if self.vacancy_relevant_criteria(vacancy_data, specified_criteria):
                     vacancies.append(vacancy_data)
         return vacancies
 
-    def delete_vacancy(self, vacancy=Vacancy):
+    def delete_vacancy(self, vacancy: Vacancy):
         """
         Метод для удаления информации о вакансиях из JSON файла.
         """
@@ -48,10 +48,12 @@ class JSONDataProcessing(AbstractDataProcessing):
             lines = file.readlines()
         with open(self.path, "w", encoding="utf-8") as file:
             for line in lines:
-                file.write(line)
+                vacancy_data = json.loads(line)
+                if not self.equality_of_vacancies(vacancy_data, vacancy):
+                    file.write(line)
 
     @staticmethod
-    def _vacancy_relevant_criteria(vacancy_data, specified_criteria):
+    def vacancy_relevant_criteria(vacancy_data, specified_criteria):
         """
         Метод проверяет, соответствует ли вакансия указанным критериям.
         """
@@ -59,3 +61,10 @@ class JSONDataProcessing(AbstractDataProcessing):
             if key not in vacancy_data or vacancy_data[key] != value:
                 return False
         return True
+
+    @staticmethod
+    def equality_of_vacancies(vacancy_data1, vacancy_data2):
+        """
+        Метод проверяет, равны ли две вакансии.
+        """
+        return vacancy_data1 == vacancy_data2

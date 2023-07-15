@@ -9,7 +9,7 @@ class SuperJobAPI(AbstractAPI):
     """
     url = "https://api.superjob.ru/2.0"
 
-    def __init__(self, url, vacancies_count=50):
+    def __init__(self, url=url, vacancies_count=50):
         """
         Инициализация класса SuperJobAPI.
         """
